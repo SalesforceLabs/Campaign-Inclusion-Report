@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Campaign Report Filter</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Campaign Report Filters</value>
+    </caseValues>
+    <fields>
+        <label><!-- Campaign Report Header --></label>
+        <name>Campaign_Report_Header__c</name>
+        <relationshipLabel><!-- Campaign Report Filters --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>Campaign__c</name>
+        <relationshipLabel><!-- Campaign Report Filters --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Included Or Excluded --></label>
+        <name>Included_Or_Excluded__c</name>
+        <picklistValues>
+            <masterLabel>Excluded</masterLabel>
+            <translation><!-- Excluded --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Included</masterLabel>
+            <translation><!-- Included --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

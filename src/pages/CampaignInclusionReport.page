@@ -1,0 +1,129 @@
+<!-- 
+Copyright (c) 2011, salesforce.com, Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, 
+are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice, 
+    this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice, 
+    this list of conditions and the following disclaimer in the documentation 
+    and/or other materials provided with the distribution.
+    * Neither the name of the salesforce.com, Inc. nor the names of its contributors 
+    may be used to endorse or promote products derived from this software 
+    without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
+OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<apex:page StandardController="Campaign_Report_Header__c" extensions="CampaignInclusionReportController" >
+ <apex:sectionHeader title="Campaign" subtitle="Campaign Inclusion Report" />
+ <apex:form >
+<apex:pageBlock id="pBlock" >
+
+		<apex:outputText >Search on: </apex:outputText>
+        <apex:selectRadio value="{!leadOrContact}">
+            <apex:selectOptions value="{!leadOrContactOptions}"/>
+            </apex:selectRadio><p/>
+		<apex:outputPanel id="cLinePanel">
+
+        <apex:pageBlockTable value="{!campaignLines}" var="cLine" id="lineTable">
+            <apex:column >
+            	<apex:selectList value="{!cLine.includedExcluded}" size="1">
+            		<apex:selectOptions value="{!cLine.includedExcludedList}" />
+            	</apex:selectList>
+            </apex:column> 
+             <apex:column headerValue="Campaign">
+            	<apex:inputField value="{!cLine.camMember.CampaignId}" required="false" />
+            </apex:column> 
+			<apex:column headerValue="Status">
+            	<apex:inputField value="{!cLine.camMember.Status}" />
+            </apex:column>         
+            <apex:column >
+            	<apex:outputText >AND</apex:outputText>
+            </apex:column>
+
+        </apex:pageBlockTable> 
+        </apex:outputPanel>
+        <apex:commandButton value="Add New Line" action="{!addLine}" rerender="cLinePanel" immediate="false" />
+		<apex:commandButton value="Remove Line" action="{!removeLine}" rerender="cLinePanel" immediate="false" />
+     <apex:actionStatus id="executeStatus">
+         <apex:facet name="start">
+             <apex:outputPanel id="executeStatusWorking" layout="none">
+            	 **Working**
+             </apex:outputPanel>
+         </apex:facet>
+         <apex:facet name="stop"  >
+             <apex:outputPanel id="executeStatusNotworking" layout="none">
+                 <apex:commandButton value="Search" id="searchCampaigns" action="{!searchCampaigns}" status="executeStatus" rerender="resultsPanel,saveOptionPanel" />
+             </apex:outputPanel>
+         </apex:facet>
+     </apex:actionStatus>
+        
+        <apex:pageBlockSection id="resultsPanel" >
+        	<apex:outputText value="{!errorMessages}" styleClass="errorMsg" />
+	<BR />	
+        	<apex:pageBlockTable value="{!displayResults}" var="result" rendered="{!hasResults}">
+        		<apex:column headerValue="First Name">
+        			<apex:outputText value="{!result.First_Name__c}" />
+        		</apex:column>
+        		<apex:column headerValue="Last Name">
+        			<apex:outputText value="{!result.Last_Name__c}" />
+        		</apex:column>   
+         		<apex:column headerValue="Company">
+        			<apex:outputText value="{!result.Company__c}" />
+        		</apex:column>          		     		
+        		<apex:column headerValue="Email">
+        			<apex:outputText value="{!result.Email__c}" />
+        		</apex:column>           		
+        	</apex:pageBlockTable>
+        	<apex:outputPanel rendered="{!hasResults}">
+        	<P></P>
+        		<apex:outputText >Displaying only first 100 results, but all results will be saved.</apex:outputText>
+        	</apex:outputPanel>
+        	 
+        </apex:pageBlockSection>
+   <apex:outputPanel id="saveOptionPanel" > 
+   <apex:pageBlockSection rendered="{!hasResults}" title="Save Options" >
+     
+            <apex:selectRadio value="{!saveOption}" layout="pageDirection">
+            <apex:selectOptions value="{!saveOptions}"/>
+            <apex:actionSupport event="onclick" reRender="campSaveSec,statusSaveSec" status="..." />
+            
+            </apex:selectRadio><p/>
+            <apex:pageBlockSectionItem >
+        		<apex:outputLabel for="campSave" value="Campaign" />
+        		<apex:outputPanel id="campSaveSec" styleClass="requiredInput" layout="block">
+				   <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+	        		<apex:inputField value="{!camMember.CampaignId}" id="campSave" required="false" />
+       				<script>document.getElementById('{!$Component.campSave}').disabled = {!JSENCODE(saveOption) != 'Save search terms and add results to Campaign'}; 
+       				</script>    		
+        		</apex:outputPanel>
+        	</apex:pageBlockSectionItem>
+        	<apex:pageBlockSectionItem >
+        		<apex:outputLabel for="statusSave" value="Status" />
+        			<apex:outputPanel id="statusSaveSec">
+        			<apex:inputField value="{!camMember.Status}" id="statusSave" required="false" />	
+        	    	<script>document.getElementById('{!$Component.statusSave}').disabled = {!JSENCODE(saveOption) != 'Save search terms and add results to Campaign'}; </script>    		
+        		</apex:outputPanel>
+        	</apex:pageBlockSectionItem>    
+        	
+        	 <apex:commandButton value="Save Report" action="{!saveReport}" />         
+        </apex:pageBlockSection>
+       
+       </apex:outputPanel>   
+          
+          <apex:commandButton value="Cancel" action="{!cancel}" />
+
+</apex:pageBlock>
+     </apex:form>
+</apex:page>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Campaign Report Header</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Campaign Report Headers</value>
+    </caseValues>
+    <fields>
+        <label><!-- Report Options --></label>
+        <name>Report_Options__c</name>
+        <picklistValues>
+            <masterLabel>Both</masterLabel>
+            <translation><!-- Both --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Contact</masterLabel>
+            <translation><!-- Contact --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lead</masterLabel>
+            <translation><!-- Lead --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Campaign Report Header Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Add_Results_to_Campaign_as_Campaign_Members --></label>
+        <name>Add_Results_to_Campaign_as_Campaign_Members</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Run_Report --></label>
+        <name>Run_Report</name>
+    </webLinks>
+</CustomObjectTranslation>

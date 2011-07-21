@@ -1,0 +1,43 @@
+<apex:page StandardController="Campaign_Report_Header__c" extensions="SelectableResults" >
+<apex:sectionHeader title="Campaign" subtitle="Add Campaign Members" />
+<apex:form >
+<apex:pageBlock >
+
+<apex:pageBlockSection title="Select results to add as Campaign Members">
+		<apex:pageBlockTable value="{!results}" var="res">
+       	       <apex:column width="25px">
+       		     <apex:inputCheckbox value="{!res.checked}"/>
+        		  </apex:column>
+        		<apex:column headerValue="First Name">
+        			<apex:outputText value="{!res.cr.First_Name__c}" />
+        		</apex:column>
+        		<apex:column headerValue="Last Name">
+        			<apex:outputText value="{!res.cr.Last_Name__c}" />
+        		</apex:column>   
+        		<apex:column headerValue="Company">
+        			<apex:outputText value="{!res.cr.Company__c}" />
+        		</apex:column>       
+        		<apex:column headerValue="Email">
+        			<apex:outputText value="{!res.cr.Email__c}" />
+        		</apex:column>               		   		     		
+        	</apex:pageBlockTable>  
+        </apex:pageBlockSection>
+        <apex:pageBlockSection columns="1">	
+        	<apex:pageBlockSectionItem >
+        		<apex:outputLabel for="camp" value="Campaign" />
+        		<apex:inputField value="{!camMember.CampaignId}" id="camp" required="true" />
+        	</apex:pageBlockSectionItem>
+        	<apex:pageBlockSectionItem >
+        		<apex:outputLabel for="status" value="Status" />
+        		<apex:inputField value="{!camMember.Status}" id="status" required="true" />	
+        	</apex:pageBlockSectionItem>
+
+</apex:pageBlockSection>     
+        	<apex:pageBlockButtons >
+        		  <apex:commandButton value="Save" action="{!save}" />
+        		  <apex:commandButton value="Cancel" action="{!cancel}" />
+        	</apex:pageBlockButtons>   	
+
+ </apex:pageBlock>     
+  </apex:form>	
+</apex:page>
