@@ -59,7 +59,7 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
      <apex:actionStatus id="executeStatus">
          <apex:facet name="start">
              <apex:outputPanel id="executeStatusWorking" layout="none">
-            	 **Working**
+            	 <apex:image url="{!$Resource.loader}" width="16" height="16" />
              </apex:outputPanel>
          </apex:facet>
          <apex:facet name="stop"  >
@@ -116,8 +116,19 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
         	    	<script>document.getElementById('{!$Component.statusSave}').disabled = {!JSENCODE(saveOption) != 'Save search terms and add results to Campaign'}; </script>    		
         		</apex:outputPanel>
         	</apex:pageBlockSectionItem>    
-        	
-        	 <apex:commandButton value="Save Report" action="{!saveReport}" />         
+        	       	             
+     <apex:actionStatus id="savestatusend">
+         <apex:facet name="start">
+             <apex:outputPanel id="saveStatusendWorking" layout="none">
+            	 <apex:image url="{!$Resource.loader}" width="16" height="16" />
+             </apex:outputPanel>
+         </apex:facet>
+         <apex:facet name="stop"  >
+             <apex:outputPanel id="saveStatusendNotworking" layout="none">
+                 <apex:commandButton value="Save Report" id="endsave" action="{!saveReport}" status="savestatusend"/>
+             </apex:outputPanel>
+         </apex:facet>
+     </apex:actionStatus>        	             
         </apex:pageBlockSection>
        
        </apex:outputPanel>   

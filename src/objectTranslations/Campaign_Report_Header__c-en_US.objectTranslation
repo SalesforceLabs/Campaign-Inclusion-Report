@@ -24,13 +24,6 @@
             <translation><!-- Lead --></translation>
         </picklistValues>
     </fields>
-    <layouts>
-        <layout>Campaign Report Header Layout</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-    </layouts>
     <startsWith>Consonant</startsWith>
     <webLinks>
         <label><!-- Add_Results_to_Campaign_as_Campaign_Members --></label>

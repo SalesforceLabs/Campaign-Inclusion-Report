@@ -14,7 +14,8 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>Edit</actionName>
-        <type>Default</type>
+        <content>CampaignReportHeaderDetail</content>
+        <type>Visualforce</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>List</actionName>
@@ -22,7 +23,8 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>New</actionName>
-        <type>Default</type>
+        <content>CampaignReportHeaderDetail</content>
+        <type>Visualforce</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>Tab</actionName>
